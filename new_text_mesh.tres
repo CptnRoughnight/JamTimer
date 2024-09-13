@@ -1,0 +1,18 @@
+[gd_resource type="TextMesh" load_steps=5 format=3 uid="uid://b4f3f5v26ctjp"]
+
+[ext_resource type="FontFile" uid="uid://0h8nujlouyru" path="res://Oswald/static/Oswald-Bold.ttf" id="1_uubvy"]
+
+[sub_resource type="Gradient" id="Gradient_5typ8"]
+offsets = PackedFloat32Array(0, 0.465116, 1)
+colors = PackedColorArray(0.152941, 0.203922, 0.305882, 1, 0.835294, 0.25098, 0.180392, 1, 0.811765, 0.843137, 0.847059, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pm55l"]
+gradient = SubResource("Gradient_5typ8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_og6ae"]
+albedo_texture = SubResource("GradientTexture2D_pm55l")
+
+[resource]
+material = SubResource("StandardMaterial3D_og6ae")
+text = "Godot Wild Jam"
+font = ExtResource("1_uubvy")

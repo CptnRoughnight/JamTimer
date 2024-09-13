@@ -1,0 +1,22 @@
+[gd_resource type="TextMesh" load_steps=5 format=3 uid="uid://crb8vm6fi4oxe"]
+
+[ext_resource type="FontFile" uid="uid://baa88jwuy7hhj" path="res://Lato/Lato-Bold.ttf" id="1_4bs5o"]
+
+[sub_resource type="Gradient" id="Gradient_tlujq"]
+interpolation_mode = 2
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.55814, 1)
+colors = PackedColorArray(0.0784314, 0.133333, 0.25098, 1, 0.980392, 0.380392, 0.286275, 1, 0.941176, 0.941176, 0.941176, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3mj7d"]
+gradient = SubResource("Gradient_tlujq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2f7e"]
+albedo_texture = SubResource("GradientTexture2D_3mj7d")
+
+[resource]
+material = SubResource("StandardMaterial3D_y2f7e")
+text = "9 days, 12 hours, 34 minutes"
+font = ExtResource("1_4bs5o")
+font_size = 24
+depth = 0.045

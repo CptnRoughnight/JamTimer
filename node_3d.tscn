@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccmwdxu6eg63q"]
+
+[ext_resource type="Script" path="res://node_3d.gd" id="1_4h6hb"]
+[ext_resource type="TextMesh" uid="uid://b4f3f5v26ctjp" path="res://new_text_mesh.tres" id="1_071fk"]
+[ext_resource type="TextMesh" uid="uid://crb8vm6fi4oxe" path="res://countdown.tres" id="2_tjh8r"]
+[ext_resource type="PackedScene" uid="uid://cygutnke1k81t" path="res://wildling.glb" id="4_6bid3"]
+
+[sub_resource type="Environment" id="Environment_5ayob"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_63i83"]
+resource_name = "new_animation"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wildling:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0), Vector3(2.76809, 0, 0), Vector3(0.973894, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ghqkf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wildling:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.76809, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kn28a"]
+_data = {
+"RESET": SubResource("Animation_ghqkf"),
+"new_animation": SubResource("Animation_63i83")
+}
+
+[node name="countdown" type="Node3D"]
+script = ExtResource("1_4h6hb")
+
+[node name="Label3D" type="Label3D" parent="."]
+
+[node name="wildjam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.638565, 0)
+mesh = ExtResource("1_071fk")
+
+[node name="counter" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145, 0)
+mesh = ExtResource("2_tjh8r")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 2.042)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5ayob")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="wildling" parent="." instance=ExtResource("4_6bid3")]
+transform = Transform3D(0.1, 0, 0, 0, 0.0459716, -0.0888066, 0, 0.0888066, 0.0459716, -1.042, 36.019, -87.911)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_kn28a")
+}
+autoplay = "new_animation"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
